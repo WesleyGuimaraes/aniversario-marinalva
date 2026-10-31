@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Imagem de prévia do link</title>
+  <!-- Prévia que aparece ao colar o link no WhatsApp (1200×630). Gerada como PNG pelo navegador headless. -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body {
+      font-family: "DM Sans", sans-serif;
+      color: #2f3a2f;
+      background: linear-gradient(120deg, #e3eedf 0%, #f3f2e6 60%, #faf5ec 100%);
+      display: flex; align-items: center;
+      padding: 0 70px 0 90px;
+      gap: 30px;
+    }
+    .texto { flex: 1; }
+    .eyebrow {
+      font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #c8714f; font-size: 24px;
+    }
+    h1 {
+      font-family: "Fraunces", serif; font-weight: 700;
+      color: #4f7a52; line-height: 1.02;
+      font-size: 88px; margin-top: 18px;
+    }
+    .data {
+      margin-top: 30px;
+      display: inline-block;
+      background: #fff; border-radius: 999px;
+      padding: 14px 32px;
+      font-size: 28px; font-weight: 700;
+      box-shadow: 0 8px 24px rgba(60, 50, 30, 0.08);
+    }
+    .data span { color: #c8714f; padding: 0 8px; }
+    .plantas { flex: none; width: 430px; }
+    .plantas svg { width: 100%; height: auto; display: block; }
+  </style>
+</head>
+<body>
+  <div class="texto">
+    <p class="eyebrow">Lista de presentes</p>
+    <h1>Aniversário da<br>Marinalva</h1>
+    <p class="data">Sábado, 21 de novembro<span>·</span>18h30</p>
+  </div>
+  <div class="plantas">
+    <svg viewBox="0 0 240 250" id="plantas"></svg>
+  </div>
+
+  <script src="../desenhos.js"></script>
+  <script>
+    document.getElementById("plantas").innerHTML = [
+      Desenhos.grupo("coluna", 10, 0, 1.1),
+      Desenhos.grupo("babosa", 118, 6, 1.02),
+      Desenhos.grupo("roseta", 0, 132, 0.95),
+      Desenhos.grupo("bola", 112, 122, 1.04),
+    ].join("");
+  </script>
+</body>
+</html>
