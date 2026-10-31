@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lista de Presentes</title>
+  <meta name="description" content="Lista de presentes de aniversário — cactos e suculentas.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌵</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Lista de presentes</p>
+      <h1 id="titulo">Aniversário</h1>
+      <p class="detalhes" id="detalhes"></p>
+      <p class="mensagem" id="mensagem"></p>
+      <a href="#lista" class="btn btn-primario">Ver a lista</a>
+    </div>
+    <section class="como-funciona">
+      <div class="passo"><span>1</span><p>Escolha uma plantinha da lista</p></div>
+      <div class="passo"><span>2</span><p>Pague o valor pelo Pix (QR Code ou copia e cola)</p></div>
+      <div class="passo"><span>3</span><p>Avise no WhatsApp para ela saber o seu presente</p></div>
+    </section>
+    <svg class="hero-plantas" viewBox="0 0 400 140" aria-hidden="true">
+      <g id="hero-desenhos"></g>
+    </svg>
+  </header>
+
+  <main id="lista">
+    <div class="barra">
+      <nav class="filtros" aria-label="Filtrar presentes">
+        <button class="filtro ativo" data-cat="todos">Todos</button>
+        <button class="filtro" data-cat="cactos">Cactos</button>
+        <button class="filtro" data-cat="suculentas">Suculentas</button>
+        <button class="filtro" data-cat="cantinho">Para o cantinho</button>
+      </nav>
+      <label class="ordem">
+        <span>Ordenar:</span>
+        <select id="ordem">
+          <option value="padrao">Padrão</option>
+          <option value="menor">Mais barato → mais caro</option>
+          <option value="maior">Mais caro → mais barato</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="grade" id="grade"></div>
+
+    <section class="valor-livre">
+      <h2>Prefere escolher o valor?</h2>
+      <p>Qualquer contribuição ajuda o jardim a crescer.</p>
+      <form id="form-livre">
+        <label class="campo-valor">
+          <span>R$</span>
+          <input type="number" id="valor-livre" min="1" step="0.01" placeholder="50,00" required>
+        </label>
+        <button class="btn btn-primario" type="submit">Presentear</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Feito com carinho 🌵</p>
+  </footer>
+
+  <!-- Modal de pagamento -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-fundo" data-fechar></div>
+    <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <button class="modal-fechar" data-fechar aria-label="Fechar">×</button>
+
+      <div id="etapa-nome">
+        <p class="eyebrow">Seu presente</p>
+        <h2 id="modal-titulo">—</h2>
+        <p class="modal-valor" id="modal-valor"></p>
+        <form id="form-nome">
+          <label>Seu nome
+            <input type="text" id="convidado" required placeholder="Como você quer ser lembrado(a)">
+          </label>
+          <label>Recadinho (opcional)
+            <textarea id="recado" rows="3" placeholder="Feliz aniversário!"></textarea>
+          </label>
+          <button class="btn btn-primario btn-largo" type="submit">Gerar Pix</button>
+        </form>
+      </div>
+
+      <div id="etapa-pix" hidden>
+        <p class="eyebrow">Pague com Pix</p>
+        <h2 id="pix-titulo">—</h2>
+        <p class="modal-valor" id="pix-valor"></p>
+        <div class="aviso" id="aviso-config" hidden>
+          A chave Pix ainda não foi configurada em <code>config.js</code>.
+        </div>
+        <div class="qrcode" id="qrcode"></div>
+        <p class="dica">Abra o app do banco, escolha <strong>Pix → Ler QR Code</strong> ou use o código abaixo em <strong>Pix copia e cola</strong>.</p>
+        <div class="copia-cola">
+          <input type="text" id="pix-codigo" readonly>
+          <button class="btn btn-secundario" id="btn-copiar" type="button">Copiar</button>
+        </div>
+        <button class="btn btn-primario btn-largo" id="btn-paguei" type="button">Já fiz o Pix</button>        <button class="link" type="button" id="btn-voltar">← Voltar</button>
+      </div>
+
+      <div id="etapa-obrigado" hidden>
+        <div class="obrigado-icone" id="obrigado-desenho"></div>
+        <h2>Obrigado!</h2>
+        <p class="dica" id="obrigado-texto"></p>
+        <a class="btn btn-whats btn-largo" id="btn-whats" target="_blank" rel="noopener">Avisar no WhatsApp</a>
+        <button class="link" type="button" data-fechar>Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="config.js"></script>
+  <script src="desenhos.js"></script>
+  <script src="pix.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
